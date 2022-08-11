@@ -75,7 +75,7 @@ public class Maze : MonoBehaviour
         grid[currentRow, currentColumn].Visited = true;
 
         Walk();
-        //Hunt():                                    
+        Hunt();                                    
         
     }
 
@@ -186,7 +186,17 @@ public class Maze : MonoBehaviour
             //Check up
             if(direction == 0){
                 if(currentRow > 0 && grid[currentRow -1, currentColumn].Visited){
-                    Destroy(grid[currentRow - 1, currentColumn].DownWall);
+
+                    Debug.Log("Destroyed down wall." + (currentRow - 1)+ " " + currentColumn);
+
+                    if (grid[currentRow, currentColumn].UpWall){
+                        Destroy(grid[currentRow, currentColumn].UpWall);
+                    }
+
+                    if (grid[currentRow-1, currentColumn].DownWall){
+                        Destroy(grid[currentRow - 1, currentColumn].DownWall);
+                    }
+
                     destroyed = true;
                 }
             }
@@ -194,7 +204,17 @@ public class Maze : MonoBehaviour
             //Check down
             else if (direction ==1){
                 if(currentRow < Rows -1 && grid[currentRow +1, currentColumn].Visited){
-                    Destroy(grid[currentRow + 1, currentColumn].UpWall);
+                    
+                    Debug.Log("Destroyed up wall." + (currentRow + 1)+ " " + currentColumn);
+
+                    if (grid[currentRow, currentColumn].DownWall){
+                        Destroy(grid[currentRow, currentColumn].DownWall);
+                    }
+
+                    if (grid[currentRow + 1, currentColumn].UpWall){
+                        Destroy(grid[currentRow + 1, currentColumn].UpWall);
+                    }
+                    
                     destroyed = true;
                 }
             }
@@ -202,7 +222,18 @@ public class Maze : MonoBehaviour
             //Check left
             else if (direction ==2){
                 if(currentColumn > 0 && grid[currentRow, currentColumn -1].Visited){
-                    Destroy(grid[currentRow, currentColumn -1].RightWall);
+                    
+                    Debug.Log("Destroyed right wall." + currentRow + " " + (currentColumn -1));
+
+                    if (grid[currentRow, currentColumn].LeftWall){
+                        Destroy(grid[currentRow, currentColumn].LeftWall);
+                    }
+
+                    if (grid[currentRow, currentColumn -1].RightWall){
+                        Destroy(grid[currentRow, currentColumn -1].RightWall);
+                    }
+
+                    
                     destroyed = true;
                 }
             }
@@ -210,7 +241,16 @@ public class Maze : MonoBehaviour
             //Check right
             else if (direction ==3){
                 if(currentColumn < Columns -1 && grid[currentRow, currentColumn + 1].Visited){
-                    Destroy(grid[currentRow, currentColumn +1].LeftWall);
+                    
+                    Debug.Log("Destroyed left wall." + currentRow + " " + (currentColumn -1));
+                    
+                    if (grid[currentRow, currentColumn].RightWall){
+                        Destroy(grid[currentRow, currentColumn].RightWall);
+                    }
+
+                    if (grid[currentRow, currentColumn +1].LeftWall){
+                        Destroy(grid[currentRow, currentColumn +1].LeftWall);
+                    }
                     destroyed = true;
                 }
             }
