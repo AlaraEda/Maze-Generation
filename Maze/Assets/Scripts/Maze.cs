@@ -15,6 +15,8 @@ public class Maze : MonoBehaviour
     private int currentRow = 0;
     private int currentColumn = 0;
 
+    private bool scanComplete = false;
+
     // Start is called before the first frame update
     void Start(){
 
@@ -66,6 +68,15 @@ public class Maze : MonoBehaviour
                 downWall.transform.parent = transform;
                 leftWall.transform.parent = transform;
                 rightWall.transform.parent = transform;
+
+                //Destroy the entrance (starting point) and exit-point walls of the maze
+                if (i == 0 & j == 0){
+                    Destroy(leftWall);
+                }
+
+                if (i == Rows -1 && j == Columns -1){
+                    Destroy(rightWall);
+                }
             }
         }
     }
@@ -74,9 +85,10 @@ public class Maze : MonoBehaviour
         //Mark the first cell of the random walk as visited.
         grid[currentRow, currentColumn].Visited = true;
 
-        Walk();
-        Hunt();                                    
-        
+        while (!scanComplete){
+            Walk();
+            Hunt();    
+        }                             
     }
 
     void Walk(){
@@ -161,11 +173,18 @@ public class Maze : MonoBehaviour
 
     //Scan the grid looking for an unvisited cell that is adjacented to a visited cell
     void Hunt(){
+
+        scanComplete = true;
+
         for (int i = 0; i<Rows; i++){
             for (int j = 0; j < Columns; j++){
                 
                 //Scan the grid until you find a cell that is unvisited and has an unvisited neighbor
                 if(!grid[i,j].Visited && AreThereVisitedNeighbors(i,j)){
+
+                    //if an unvisited neighbor has been found, do another random walk from that cell. 
+                    scanComplete = false;
+
                     currentRow = i;
                     currentColumn = j;
                     grid[currentRow, currentColumn].Visited = true;
