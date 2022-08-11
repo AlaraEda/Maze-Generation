@@ -70,47 +70,17 @@ public class Maze : MonoBehaviour
         }
     }
 
-    //Check if there are unvisted neighbors
-    bool AreThereAreUnvistedNeighbors(){
-        
-        //Check up
-        if (IsCellUnvisitedAndWithinBoundaries(currentRow -1, currentColumn)){
-            return true;
-        }
-
-        //Check down
-        if (IsCellUnvisitedAndWithinBoundaries(currentRow +1, currentColumn)){
-            return true;
-        }
-
-        //Check left
-        if (IsCellUnvisitedAndWithinBoundaries(currentRow, currentColumn + 1)){
-            return true;
-        }
-
-        //Check right
-        if (IsCellUnvisitedAndWithinBoundaries(currentRow, currentColumn - 1)){
-            return true;
-        }
-
-        //Dead-end? Return false. 
-        return false;
-    }
-
-    //Do Boundary Check and unVisited Check
-    bool IsCellUnvisitedAndWithinBoundaries(int row, int column){
-        if (row >=0 && row < Rows && column >=0 && column < Columns && !grid[row, column].Visited){
-            return true;
-        }
-
-        return false;
-    }
-
     void HuntAndKill(){
         //Mark the first cell of the random walk as visited.
-        grid[currentRow, currentColumn].Visited = true;                                         
+        grid[currentRow, currentColumn].Visited = true;
+
+        Walk();
+        //Hunt():                                    
         
-        while(AreThereAreUnvistedNeighbors()){
+    }
+
+    void Walk(){
+        while(AreThereUnvistedNeighbors()){
             //Choose a random direction to walk
             int direction = Random.Range(0,4);                                                      
 
@@ -187,5 +157,124 @@ public class Maze : MonoBehaviour
                 }
             }
         }
+    }
+
+    //Scan the grid looking for an unvisited cell that is adjacented to a visited cell
+    void Hunt(){
+        for (int i = 0; i<Rows; i++){
+            for (int j = 0; j < Columns; j++){
+                
+                //Scan the grid until you find a cell that is unvisited and has an unvisited neighbor
+                if(!grid[i,j].Visited && AreThereVisitedNeighbors(i,j)){
+                    currentRow = i;
+                    currentColumn = j;
+                    grid[currentRow, currentColumn].Visited = true;
+                    //Randomly destroy a wall
+                    DestroyAdjacentWall();
+                    return;
+                }
+            }
+        }
+    }
+
+    void DestroyAdjacentWall(){
+        bool destroyed = false;
+
+        while (!destroyed){
+            int direction = Random.Range(0,4);
+
+            //Check up
+            if(direction == 0){
+                if(currentRow > 0 && grid[currentRow -1, currentColumn].Visited){
+                    Destroy(grid[currentRow - 1, currentColumn].DownWall);
+                    destroyed = true;
+                }
+            }
+
+            //Check down
+            else if (direction ==1){
+                if(currentRow < Rows -1 && grid[currentRow +1, currentColumn].Visited){
+                    Destroy(grid[currentRow + 1, currentColumn].UpWall);
+                    destroyed = true;
+                }
+            }
+
+            //Check left
+            else if (direction ==2){
+                if(currentColumn > 0 && grid[currentRow, currentColumn -1].Visited){
+                    Destroy(grid[currentRow, currentColumn -1].RightWall);
+                    destroyed = true;
+                }
+            }
+
+            //Check right
+            else if (direction ==3){
+                if(currentColumn < Columns -1 && grid[currentRow, currentColumn + 1].Visited){
+                    Destroy(grid[currentRow, currentColumn +1].LeftWall);
+                    destroyed = true;
+                }
+            }
+        }
+    }
+
+        //Check if there are unvisted neighbors
+    bool AreThereUnvistedNeighbors(){
+        
+        //Check up
+        if (IsCellUnvisitedAndWithinBoundaries(currentRow -1, currentColumn)){
+            return true;
+        }
+
+        //Check down
+        if (IsCellUnvisitedAndWithinBoundaries(currentRow +1, currentColumn)){
+            return true;
+        }
+
+        //Check left
+        if (IsCellUnvisitedAndWithinBoundaries(currentRow, currentColumn + 1)){
+            return true;
+        }
+
+        //Check right
+        if (IsCellUnvisitedAndWithinBoundaries(currentRow, currentColumn - 1)){
+            return true;
+        }
+
+        //Dead-end? Return false. 
+        return false;
+    }
+
+    public bool AreThereVisitedNeighbors(int row, int column){
+
+        //Check Up
+        if( row > 0 && grid[row -1, column].Visited){
+            return true;
+        }
+
+        //Check down
+        if(row < Rows -1 && grid[row +1, column].Visited){
+            return true;
+        }
+
+        //Check left
+        if(column > 0 && grid[row, column -1].Visited){
+            return true;
+        }
+
+        //Check Right
+        if(column < Columns -1 && grid[row, column +1].Visited){
+            return true;
+        }
+
+        return false;
+    }
+
+    //Do Boundary Check and unVisited Check
+    bool IsCellUnvisitedAndWithinBoundaries(int row, int column){
+        if (row >=0 && row < Rows && column >=0 && column < Columns && !grid[row, column].Visited){
+            return true;
+        }
+
+        return false;
     }
 }
