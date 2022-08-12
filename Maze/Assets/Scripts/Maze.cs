@@ -11,15 +11,8 @@ public class Maze : MonoBehaviour
     public GameObject Wall;
     public GameObject Floor;
 
-    // public Inputfield HeightField;
-    // public Inputfield WidthField;
-
-    // public TextMeshProUGUI HeightField;
-    // public TextMeshProUGUI WidthField;
-
     public GameObject HeightField;
     public GameObject WidthField;
-
 
     //Create the grid? Two-Dimensional Array
     private MazeCell[,] grid;
@@ -42,6 +35,8 @@ public class Maze : MonoBehaviour
         //Grid with all the walls & floors
         //Dimensions should be at least 2x2
         CreateGrid();
+
+        ChangeCameraPosition();
 
         currentRow = 0;
         currentColumn = 0;
@@ -103,6 +98,16 @@ public class Maze : MonoBehaviour
                 }
             }
         }
+    }
+
+    //Change Camera Position, so you can see the whole grid everytime. 
+    void ChangeCameraPosition(){
+        float size = Wall.transform.localScale.x;
+        Vector3 cameraPosition = Camera.main.transform.position;
+        cameraPosition.x = Mathf.Round(Columns/2) * size;
+        cameraPosition.y = Mathf.Max(13, Mathf.Max(Rows, Columns) * 3.5f);     //Minimum zoom out is 13. 
+        cameraPosition.z = -Mathf.Round(Rows/2) * size;
+        Camera.main.transform.position = cameraPosition;
     }
 
     void HuntAndKill(){
@@ -369,12 +374,14 @@ public class Maze : MonoBehaviour
         
         
         if (int.TryParse(HeightField.GetComponent<TMP_InputField>().text, out rows)){
-            Rows = rows;
-            Debug.Log("blub?");
+
+            //Minimum Rows is 2, if rows is 0, than it will still select 2.
+            Rows = Mathf.Max(2,rows);
         }
 
         if (int.TryParse(WidthField.GetComponent<TMP_InputField>().text, out columns)){
-            Columns = columns;
+            //Minimum Columns is 2, if rows is 0, than it will still select 2.
+            Columns = Mathf.Max(2,columns);
         }
 
         GenerateGrid();
