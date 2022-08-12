@@ -1177,8 +1177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84aab13f5c8e3f42b22cdb4b353298e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rows: 5
-  Columns: 5
+  Rows: 10
+  Columns: 10
   Wall: {fileID: 3983836908416800974, guid: 4c82c2decb6550c498449f03d714f768, type: 3}
   Floor: {fileID: 3488992242811370878, guid: 526f658df99d34f4db5dd92b12c7a344, type: 3}
   HeightField: {fileID: 1864260859}
