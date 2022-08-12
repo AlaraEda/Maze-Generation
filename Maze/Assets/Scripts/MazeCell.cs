@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MazeCell : MonoBehaviour
+public class MazeCell
 {
     //Are cells visited or not by the algorithm?
     public bool Visited = false;

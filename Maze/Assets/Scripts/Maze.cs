@@ -1,14 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Maze : MonoBehaviour
 {
-    public int Rows = 4;
-    public int Columns = 4;
+    public int Rows = 2;
+    public int Columns = 2;
 
     public GameObject Wall;
     public GameObject Floor;
+
+    // public Inputfield HeightField;
+    // public Inputfield WidthField;
+
+    // public TextMeshProUGUI HeightField;
+    // public TextMeshProUGUI WidthField;
+
+    public GameObject HeightField;
+    public GameObject WidthField;
+
 
     //Create the grid? Two-Dimensional Array
     private MazeCell[,] grid;
@@ -19,9 +30,22 @@ public class Maze : MonoBehaviour
 
     // Start is called before the first frame update
     void Start(){
+        GenerateGrid();
+    }
+
+    void GenerateGrid(){
+        //destroy all the children of this transform object.
+        foreach (Transform transform in transform){
+            Destroy(transform.gameObject);
+        }
 
         //Grid with all the walls & floors
+        //Dimensions should be at least 2x2
         CreateGrid();
+
+        currentRow = 0;
+        currentColumn = 0;
+        scanComplete = false;
 
         //Algorithm carves path from top left to bottom right
         HuntAndKill();
@@ -335,5 +359,24 @@ public class Maze : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void Regenerate(){
+
+        int rows = 2;
+        int columns = 2;
+
+        
+        
+        if (int.TryParse(HeightField.GetComponent<TMP_InputField>().text, out rows)){
+            Rows = rows;
+            Debug.Log("blub?");
+        }
+
+        if (int.TryParse(WidthField.GetComponent<TMP_InputField>().text, out columns)){
+            Columns = columns;
+        }
+
+        GenerateGrid();
     }
 }
