@@ -375,13 +375,38 @@ public class Maze : MonoBehaviour
         
         if (int.TryParse(HeightField.GetComponent<TMP_InputField>().text, out rows)){
 
-            //Minimum Rows is 2, if rows is 0, than it will still select 2.
-            Rows = Mathf.Max(2,rows);
+            //Minimum Rows is 10, if rows is 0, than it will still select 10.
+            //Mathf returns the largest number between 10 and whatever the other one is. 
+            if (rows < 10){
+                Rows = Mathf.Max(10, rows);
+            }     
+            
+            if (rows > 250){
+                Rows = Mathf.Min(250, rows);
+            }
+            
+            if (rows > 10 && rows < 250){
+                Rows = rows;
+            }           
+            
         }
 
         if (int.TryParse(WidthField.GetComponent<TMP_InputField>().text, out columns)){
-            //Minimum Columns is 2, if rows is 0, than it will still select 2.
-            Columns = Mathf.Max(2,columns);
+            //Minimum Columns is 10, if rows is 0, than it will still select 10.
+            
+            if (columns < 10){
+                Columns = Mathf.Max(10, columns);
+            }
+            
+            else if (columns > 250){
+                Columns = Mathf.Max(250, columns);
+            }
+            
+            if (columns > 10 && columns < 250) {
+                Columns = columns;
+            }
+
+            
         }
 
         GenerateGrid();
