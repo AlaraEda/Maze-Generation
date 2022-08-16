@@ -399,14 +399,12 @@ public class Maze : MonoBehaviour
             }
             
             else if (columns > 250){
-                Columns = Mathf.Max(250, columns);
+                Columns = Mathf.Min(250, columns);
             }
             
             if (columns > 10 && columns < 250) {
                 Columns = columns;
             }
-
-            
         }
 
         GenerateGrid();
