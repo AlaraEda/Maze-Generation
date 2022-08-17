@@ -27,7 +27,7 @@ public class SwitchScript : MonoBehaviour
 
    public void Screen1(){
         //MazeCamera
-        Debug.Log("Clicked on O");
+        //Debug.Log("Clicked on O");
         MazeCamera.SetActive(true); //False to hide it, true to show. 
         FirstPerson.SetActive(false);
 
@@ -35,7 +35,7 @@ public class SwitchScript : MonoBehaviour
 
    public void Screen2(){
         //Controller
-        Debug.Log("Clicked on P");
+        //Debug.Log("Clicked on P");
         MazeCamera.SetActive(false); //False to hide it, true to show. 
         FirstPerson.SetActive(true);
    }

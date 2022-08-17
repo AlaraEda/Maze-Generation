@@ -37,6 +37,8 @@ public class Maze : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
 
+        Debug.Log("Use W/A/S/D to zoom in and out of the maze. Use O/P to switch between the maze overview and the playground.");
+
         //Default Maze Material
         Wall.GetComponent<MeshRenderer>().material = Default;
         Floor.GetComponent<MeshRenderer>().material = Default;
@@ -135,10 +137,6 @@ public class Maze : MonoBehaviour
         cameraPosition.x = Mathf.Round(Columns/2) * size;
         cameraPosition.y = Mathf.Max(13, Mathf.Max(Rows, Columns) * 3.5f);     //Minimum zoom out is 13. 
         cameraPosition.z = -Mathf.Round(Rows/2) * size;
-
-        // cameraRotation.x = 90;
-        // cameraRotation.y = 0;
-        // cameraRotation.z = 0;
 
         Camera.main.transform.position = cameraPosition;
         //Camera.main.transform.rotation = cameraRotation;
@@ -340,7 +338,7 @@ public class Maze : MonoBehaviour
         }
     }
 
-        //Check if there are unvisted neighbors
+    //Check if there are unvisted neighbors
     bool AreThereUnvistedNeighbors(){
         
         //Check up
