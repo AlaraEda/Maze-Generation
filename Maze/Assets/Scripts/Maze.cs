@@ -434,8 +434,8 @@ public class Maze : MonoBehaviour
         //Material Options: Moss, Cobblestone, Medieval, Default
         if (Version1.GetComponent<Toggle>().isOn){
             Debug.Log("Muur is moss");
-            Wall.GetComponent<MeshRenderer>().material = Moss;
-            Floor.GetComponent<MeshRenderer>().material = Cobblestone;
+            Wall.GetComponent<MeshRenderer>().material = Cobblestone;
+            Floor.GetComponent<MeshRenderer>().material = Moss;
             
         }
         
