@@ -104,10 +104,19 @@ public class Maze : MonoBehaviour
     void ChangeCameraPosition(){
         float size = Wall.transform.localScale.x;
         Vector3 cameraPosition = Camera.main.transform.position;
+        Quaternion cameraRotation = Camera.main.transform.rotation;
+        
         cameraPosition.x = Mathf.Round(Columns/2) * size;
         cameraPosition.y = Mathf.Max(13, Mathf.Max(Rows, Columns) * 3.5f);     //Minimum zoom out is 13. 
         cameraPosition.z = -Mathf.Round(Rows/2) * size;
+
+        // cameraRotation.x = 90;
+        // cameraRotation.y = 0;
+        // cameraRotation.z = 0;
+
         Camera.main.transform.position = cameraPosition;
+        //Camera.main.transform.rotation = cameraRotation;
+        Camera.main.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
     void HuntAndKill(){
