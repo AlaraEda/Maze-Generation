@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;   //Voor toggle
 using TMPro;
 
 public class Maze : MonoBehaviour
@@ -11,8 +12,17 @@ public class Maze : MonoBehaviour
     public GameObject Wall;
     public GameObject Floor;
 
+    //UI-Elements
     public GameObject HeightField;
     public GameObject WidthField;
+    public GameObject Version1;
+    public GameObject Version2;
+
+    //Materials
+    public Material Moss;
+    public Material Medieval;
+    public Material Cobblestone;
+    public Material Default;
 
     //Create the grid? Two-Dimensional Array
     private MazeCell[,] grid;
@@ -23,6 +33,12 @@ public class Maze : MonoBehaviour
 
     // Start is called before the first frame update
     void Start(){
+
+        //Default Maze Material
+        Wall.GetComponent<MeshRenderer>().material = Default;
+        Floor.GetComponent<MeshRenderer>().material = Default;
+
+        //GenerateMaze
         GenerateGrid();
     }
 
@@ -380,8 +396,6 @@ public class Maze : MonoBehaviour
         int rows = 2;
         int columns = 2;
 
-        
-        
         if (int.TryParse(HeightField.GetComponent<TMP_InputField>().text, out rows)){
 
             //Minimum Rows is 10, if rows is 0, than it will still select 10.
@@ -415,6 +429,33 @@ public class Maze : MonoBehaviour
                 Columns = columns;
             }
         }
+
+
+        //Material Options: Moss, Cobblestone, Medieval, Default
+        if (Version1.GetComponent<Toggle>().isOn){
+            Debug.Log("Muur is moss");
+            Wall.GetComponent<MeshRenderer>().material = Moss;
+            Floor.GetComponent<MeshRenderer>().material = Cobblestone;
+            
+        }
+        
+        else if (Version2.GetComponent<Toggle>().isOn){
+            Wall.GetComponent<MeshRenderer>().material = Medieval;
+            Floor.GetComponent<MeshRenderer>().material = Cobblestone;
+        }
+        
+        else{
+            //Wall.GetComponent<Renderer>().material = null;
+            Wall.GetComponent<MeshRenderer>().material = Default;
+            Floor.GetComponent<MeshRenderer>().material = Default;
+            Debug.Log("Default Material");
+        }
+
+
+
+
+
+        
 
         GenerateGrid();
     }
