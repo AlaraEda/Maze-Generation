@@ -32,11 +32,11 @@ public class CameraMovement : MonoBehaviour
         float right = 0.0f;
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            right += 1.0f;
+            right -= 1.0f;
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            right -= 1.0f;
+            right += 1.0f;
         }
 
         float currentSpeed = speed;
