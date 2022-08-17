@@ -451,12 +451,6 @@ public class Maze : MonoBehaviour
             Debug.Log("Default Material");
         }
 
-
-
-
-
-        
-
         GenerateGrid();
     }
 }
