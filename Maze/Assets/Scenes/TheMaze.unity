@@ -2140,6 +2140,8 @@ MonoBehaviour:
   Columns: 10
   Wall: {fileID: 3983836908416800974, guid: 4c82c2decb6550c498449f03d714f768, type: 3}
   Floor: {fileID: 3488992242811370878, guid: 526f658df99d34f4db5dd92b12c7a344, type: 3}
+  FinnishProp: {fileID: 809132399785516434, guid: 7d189586008317344823fe3bce5a159a, type: 3}
+  StartProp: {fileID: 3285753106757071410, guid: 77aff3761d9570d45a600661994338e9, type: 3}
   HeightField: {fileID: 1864260859}
   WidthField: {fileID: 1664650697}
   Version1: {fileID: 1961818026}

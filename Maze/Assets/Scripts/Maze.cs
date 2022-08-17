@@ -6,19 +6,22 @@ using TMPro;
 
 public class Maze : MonoBehaviour
 {
+    [Header("Maze")]
     public int Rows = 2;
     public int Columns = 2;
 
     public GameObject Wall;
     public GameObject Floor;
+    public GameObject FinnishProp;
+    public GameObject StartProp;
 
-    //UI-Elements
+    [Header("UI-Elements")]
     public GameObject HeightField;
     public GameObject WidthField;
     public GameObject Version1;
     public GameObject Version2;
 
-    //Materials
+    [Header("Materials")]
     public Material Moss;
     public Material Medieval;
     public Material Cobblestone;
@@ -107,10 +110,17 @@ public class Maze : MonoBehaviour
                 //Destroy the entrance (starting point) and exit-point walls of the maze
                 if (i == 0 & j == 0){
                     Destroy(leftWall);
+
+                    GameObject startprop = Instantiate(StartProp, new Vector3(-1.2f, 0.3f, -i * size), Quaternion.Euler(0, 90, 0));
+                    
+                    startprop.name = "StartProp_" + i + "_" + j;
                 }
 
                 if (i == Rows -1 && j == Columns -1){
                     Destroy(rightWall);
+
+                    GameObject finnishprop = Instantiate(FinnishProp, new Vector3(28.3f, 0.3f, -i * size), Quaternion.Euler(0, 90, 0));
+                    finnishprop.name = "FinnishProp_" + i + "_" + j;
                 }
             }
         }
