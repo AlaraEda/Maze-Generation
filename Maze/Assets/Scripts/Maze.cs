@@ -270,7 +270,7 @@ public class Maze : MonoBehaviour
             if(direction == 0){
                 if(currentRow > 0 && grid[currentRow -1, currentColumn].Visited){
 
-                    Debug.Log("Destroyed down wall." + (currentRow - 1)+ " " + currentColumn);
+                    //Debug.Log("Destroyed down wall." + (currentRow - 1)+ " " + currentColumn);
 
                     if (grid[currentRow, currentColumn].UpWall){
                         Destroy(grid[currentRow, currentColumn].UpWall);
@@ -288,7 +288,7 @@ public class Maze : MonoBehaviour
             else if (direction ==1){
                 if(currentRow < Rows -1 && grid[currentRow +1, currentColumn].Visited){
                     
-                    Debug.Log("Destroyed up wall." + (currentRow + 1)+ " " + currentColumn);
+                    //Debug.Log("Destroyed up wall." + (currentRow + 1)+ " " + currentColumn);
 
                     if (grid[currentRow, currentColumn].DownWall){
                         Destroy(grid[currentRow, currentColumn].DownWall);
@@ -306,7 +306,7 @@ public class Maze : MonoBehaviour
             else if (direction ==2){
                 if(currentColumn > 0 && grid[currentRow, currentColumn -1].Visited){
                     
-                    Debug.Log("Destroyed right wall." + currentRow + " " + (currentColumn -1));
+                    //Debug.Log("Destroyed right wall." + currentRow + " " + (currentColumn -1));
 
                     if (grid[currentRow, currentColumn].LeftWall){
                         Destroy(grid[currentRow, currentColumn].LeftWall);
@@ -325,7 +325,7 @@ public class Maze : MonoBehaviour
             else if (direction ==3){
                 if(currentColumn < Columns -1 && grid[currentRow, currentColumn + 1].Visited){
                     
-                    Debug.Log("Destroyed left wall." + currentRow + " " + (currentColumn -1));
+                    //Debug.Log("Destroyed left wall." + currentRow + " " + (currentColumn -1));
                     
                     if (grid[currentRow, currentColumn].RightWall){
                         Destroy(grid[currentRow, currentColumn].RightWall);
@@ -443,7 +443,6 @@ public class Maze : MonoBehaviour
 
         //Material Options: Moss, Cobblestone, Medieval, Default
         if (Version1.GetComponent<Toggle>().isOn){
-            Debug.Log("Muur is moss");
             Wall.GetComponent<MeshRenderer>().material = Cobblestone;
             Floor.GetComponent<MeshRenderer>().material = Moss;
             
@@ -458,7 +457,6 @@ public class Maze : MonoBehaviour
             //Wall.GetComponent<Renderer>().material = null;
             Wall.GetComponent<MeshRenderer>().material = Default;
             Floor.GetComponent<MeshRenderer>().material = Default;
-            Debug.Log("Default Material");
         }
 
         GenerateGrid();
