@@ -12,6 +12,12 @@ As a bonus I made sure that the user can switch scenes. If the user likes the ma
 
 *Have Fun!* <br><br>
 
+### Video
+This link shows what you can do with this project: <br>
+https://youtu.be/WJjJpvVT91Q
+
+<br><br>
+
 ```
       "Life is like a maze, you have to try out different roads to figure out the path thats destined for you."
  ```  
