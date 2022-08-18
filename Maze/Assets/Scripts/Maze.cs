@@ -32,6 +32,9 @@ public class Maze : MonoBehaviour
     private int currentRow = 0;
     private int currentColumn = 0;
 
+    private GameObject startprop;
+    private GameObject finnishprop;
+
     private bool scanComplete = false;
 
     // Start is called before the first frame update
@@ -92,7 +95,6 @@ public class Maze : MonoBehaviour
                 GameObject rightWall = Instantiate(Wall, new Vector3(j * size + 1.25f, 1.75f, -i * size), Quaternion.Euler(0, 90, 0));
                 rightWall.name = "LeftWall_" + i + "_" + j;
 
-
                 //Create all the MazeCells / the grid
                 grid[i, j] = new MazeCell();
 
@@ -113,15 +115,15 @@ public class Maze : MonoBehaviour
                 if (i == 0 & j == 0){
                     Destroy(leftWall);
 
-                    GameObject startprop = Instantiate(StartProp, new Vector3(-1.2f, 0.3f, -i * size), Quaternion.Euler(0, 90, 0));
-                    
+                    startprop = Instantiate(StartProp, new Vector3(-1.2f, 0.3f, -i * size), Quaternion.Euler(0, 90, 0));
                     startprop.name = "StartProp_" + i + "_" + j;
                 }
 
                 if (i == Rows -1 && j == Columns -1){
                     Destroy(rightWall);
 
-                    GameObject finnishprop = Instantiate(FinnishProp, new Vector3(28.3f, 0.3f, -i * size), Quaternion.Euler(0, 90, 0));
+                    //GameObject finnishprop = Instantiate(FinnishProp, new Vector3(28.3f, 0.3f, -i * size), Quaternion.Euler(0, 90, 0));
+                    finnishprop = Instantiate(FinnishProp, new Vector3(j * size + 1.25f, 0.3f, -i * size), Quaternion.Euler(0, 90, 0));
                     finnishprop.name = "FinnishProp_" + i + "_" + j;
                 }
             }
@@ -421,6 +423,10 @@ public class Maze : MonoBehaviour
             }           
             
         }
+
+        //Destroy Start-line & Finnish-line
+        Destroy(startprop);
+        Destroy(finnishprop);
 
         if (int.TryParse(WidthField.GetComponent<TMP_InputField>().text, out columns)){
             //Minimum Columns is 10, if rows is 0, than it will still select 10.
