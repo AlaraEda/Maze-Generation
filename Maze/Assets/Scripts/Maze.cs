@@ -418,7 +418,7 @@ public class Maze : MonoBehaviour
                 Rows = Mathf.Min(250, rows);
             }
             
-            if (rows > 10 && rows < 250){
+            if (rows >= 10 && rows <= 250){
                 Rows = rows;
             }           
             
@@ -439,7 +439,7 @@ public class Maze : MonoBehaviour
                 Columns = Mathf.Min(250, columns);
             }
             
-            if (columns > 10 && columns < 250) {
+            if (columns >= 10 && columns <= 250) {
                 Columns = columns;
             }
         }
